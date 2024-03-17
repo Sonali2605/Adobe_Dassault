@@ -1,0 +1,172 @@
+/* index.css */
+
+/* Header Styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #ffffff; /* White background */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Shadow */
+}
+
+.logo {
+  width: 120px; /* Adjust width as needed */
+}
+
+.nav {
+  display: flex;
+  gap: 2rem; /* Maintain the gap between nav items */
+  align-items: center;
+}
+
+.nav ul {
+  display: flex;
+  gap: 2rem; /* Maintain the gap between nav items */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav ul li {
+  margin: 0;
+}
+.nav li {
+  list-style-type: none;
+  display: flex; /* Ensure each li is a flex container */
+  align-items: center; /* Align items vertically in each li */
+  position: relative; /* Add position relative for absolute positioning */
+}
+
+.nav li a {
+  text-decoration: none;
+  color: #333333; /* Dark grey */
+  font-weight: 500;
+  transition: color 0.3s ease;
+  position: relative; /* Add position relative for absolute positioning */
+}
+
+.nav li a:hover {
+  color: #007bff; /* Blue */
+}
+
+/* Add styles for the underline */
+.nav li .underline {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #007bff; /* Blue */
+  visibility: hidden; /* Initially hide the underline */
+}
+
+.nav li.active .underline {
+  visibility: visible; /* Show the underline when the tab is active */
+}
+.nav li.active .underline,
+.nav li.active .nav-link.active {
+  visibility: visible; /* Show the underline when the tab is active */
+}
+
+.profile {
+  display: flex; /* Ensure the profile section is a flex container */
+  align-items: center; /* Align items vertically in the profile section */
+}
+
+.profile img {
+  width: 40px; /* Adjust size as needed */
+  height: 40px; /* Adjust size as needed */
+  border-radius: 50%; /* Rounded shape */
+  margin-right: 0.5rem;
+}
+
+.profile span {
+  font-weight: 500;
+}
+
+
+/* CourseList.css */
+
+.course-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.header-row {
+  background-color: #EEEEEE; /* Grey background */
+}
+
+.header-row th,
+.course-row td {
+  border: 1px solid #CCCCCC; /* Grey border */
+  padding: 0.5rem;
+}
+
+.action-button {
+  background-color: #EEEEEE; /* Light grey background */
+  color: #333333; /* Dark grey text */
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.action-button:hover {
+  background-color: #CCCCCC; /* Darker grey on hover */
+}
+.container {
+  background-color: #f4f4f6;
+  padding: 20px;
+}
+
+.form-container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-label {
+  width: 150px;
+  font-weight: bold;
+}
+
+.input-field {
+  width: 300px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button {
+  padding: 10px 20px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+.save-button {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.cancel-button {
+  background-color: #cccccc;
+  color: #ffffff;
+}
