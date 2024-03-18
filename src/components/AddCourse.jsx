@@ -8,12 +8,13 @@ const AddCourse = ({ onSave, onCancel, onGoToCourseDetails }) => {
   const [durationBetweenModules, setDurationBetweenModules] = useState(0);
   const [numberOfModules, setNumberOfModules] = useState(0);
   const [courseId, setCourseId] = useState('');
+  const [contentUrl, setContentUrl] = useState('');
   const [isPublished, setIsPublished] = useState(false); // Track whether the course is published
   const [courseToPublish, setCourseToPublish]= useState('');
 
   const handleSubmit = () => {
     // Check if any field is empty
-    if (!title || !instructor || !moduleDuration || !durationBetweenModules || !numberOfModules || !courseId) {
+    if (!title || !instructor || !moduleDuration || !durationBetweenModules || !numberOfModules || !courseId || !contentUrl) {
       alert('Please fill in all fields.');
       return;
     }
@@ -25,6 +26,7 @@ const AddCourse = ({ onSave, onCancel, onGoToCourseDetails }) => {
       module_duration: moduleDuration,
       duration_between_module: durationBetweenModules,
       instructor: instructor,
+      content_url: contentUrl,
       published: false
     };
 
@@ -49,6 +51,7 @@ const AddCourse = ({ onSave, onCancel, onGoToCourseDetails }) => {
     setDurationBetweenModules(0);
     setNumberOfModules(0);
     setCourseId('');
+    setContentUrl('');
     setIsPublished(false); // Disable the "Publish" button after clearing the fields
   };
 
@@ -104,6 +107,10 @@ const AddCourse = ({ onSave, onCancel, onGoToCourseDetails }) => {
         <div className="form-row">
           <label className="form-label">Course ID:</label>
           <input type="text" value={courseId} onChange={e => {setCourseId(e.target.value);handleInputChange();} } className="input-field" />
+        </div>
+        <div className="form-row">
+          <label className="form-label">Content Url:</label>
+          <input type="text" value={contentUrl} onChange={e => {setContentUrl(e.target.value);handleInputChange();} } className="input-field" />
         </div>
         <div className="button-container">
           <button type="submit" className="button save-button" onClick={handleSubmit}>Save</button>
