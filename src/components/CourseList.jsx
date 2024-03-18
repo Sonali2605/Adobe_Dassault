@@ -10,7 +10,7 @@ const CourseList = ({ onAddCourse }) => {
   }, []);
 
   const init =async () =>{
-    await axios.get('http://localhost:3000/courseData')
+    await axios.get('http://54.152.80.48:3000/courseData')
       .then(response => {
         setCourses(response.data.courses);
       })
@@ -29,7 +29,7 @@ const CourseList = ({ onAddCourse }) => {
 
   const handlePublishClick = async () => {
     try {
-      const response = await axios.put('http://localhost:3000/publishCourse', { ids: selectedCourses });
+      const response = await axios.put('http://54.152.80.48:3000/publishCourse', { ids: selectedCourses });
       console.log(response.data.msg); // Display success message
       alert('Course published successfully!');
       init();
