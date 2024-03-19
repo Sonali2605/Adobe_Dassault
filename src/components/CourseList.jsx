@@ -1,22 +1,65 @@
+// CourseList.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './CourseList.css'; // Import CSS for CourseList component
 
 const CourseList = ({ onAddCourse }) => {
   const [courses, setCourses] = useState([]);
   const [selectedCourses, setSelectedCourses] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedCatalogId, setSelectedCatalogId] = useState('');
+  const [catalogId, setCatalogId] = useState([]);
 
   useEffect(() => {
     init();
   }, []);
 
-  const init =async () =>{
-    await axios.get('http://localhost:3000/courseData')
-      .then(response => {
-        setCourses(response.data.courses);
-      })
-      .catch(error => {
-        console.error('Error fetching course data:', error);
-      });
+  async function getRefreshToken() {
+    try {
+      const urlencoded = new URLSearchParams();
+      urlencoded.append("client_id", "449923a1-a01c-4bf5-b7c8-2137718d6d04");
+      urlencoded.append("client_secret", "b1b22c3e-900c-4bd1-b010-daf95c01b968");
+      urlencoded.append("refresh_token", "cfc9007046dac38146b4eae495192d3c");
+
+      const response = await axios.post(
+        'https://learningmanager.adobe.com/oauth/token/refresh',
+        urlencoded,
+        {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
+  const init = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/courseData');
+      setCourses(response.data.courses);
+
+      const refreshTokenResponse = await getRefreshToken();
+      const accessToken = refreshTokenResponse.access_token;
+
+      // Fetch catalogs using the access token
+      const catalogResponse = await axios.get(
+        'https://learningmanager.adobe.com/primeapi/v2/catalogs?page[offset]=0&page[limit]=10&sort=name',
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        }
+      );
+
+      setCatalogId(catalogResponse?.data?.data);
+
+    } catch (error) {
+      console.error('Error fetching course data:', error);
+    }
   };
 
   const handleCheckboxChange = (courseId, checked) => {
@@ -27,22 +70,51 @@ const CourseList = ({ onAddCourse }) => {
     }
   };
 
-  const handlePublishClick = async () => {
+  const handlePublishClick = () => {
+    setShowModal(true);
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+    setSelectedCatalogId('');
+  };
+
+  const handlePublishConfirm = async () => {
     try {
-      const response = await axios.put('http://localhost:3000/publishCourse', { ids: selectedCourses });
+      const response = await axios.put('http://localhost:3000/publishCourse', { ids: selectedCourses, catalogId: selectedCatalogId });
       console.log(response.data.msg); // Display success message
       alert('Course published successfully!');
       init();
       setSelectedCourses([]);
+      handleModalClose();
       // Optionally, update UI or perform additional actions upon successful publishing
     } catch (error) {
       console.error('Error publishing courses:', error);
     }
   };
 
+  const handleCatalogSelection = (e) => {
+    setSelectedCatalogId(e.target.value);
+    console.log("1111111111111111111111111111111111111", selectedCatalogId)
+  };
+
   return (
     <div>
-      {/* <h2 className="text-2xl font-bold mb-4">Courses</h2> */}
+      {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" style={{ fontSize: "15px" }} onClick={handleModalClose}>&times;</span>
+            <h4 style={{ textAlign: 'center' }}>Select Catalog ID</h4>
+            <select value={selectedCatalogId} onChange={handleCatalogSelection}>
+              <option value="">Select Catalog ID</option>
+              {catalogId?.map(catalog => (
+                <option key={catalog.id} value={catalog.id}>{catalog.attributes.name}</option>
+              ))}
+            </select>
+            <button onClick={handlePublishConfirm}>OK</button>
+          </div>
+        </div>
+      )}
       <button
         className="bg-blue-500 text-white py-2 px-4 mb-4 publishBtn"
         onClick={handlePublishClick}
@@ -50,14 +122,14 @@ const CourseList = ({ onAddCourse }) => {
       >
         Publish
       </button>
-      <table className="course-table" >
+      <table className="course-table">
         <thead>
           <tr className="header-row">
-            <th style= {{textAlign:'left'}}>Course ID</th>
-            <th style= {{textAlign:'left'}}>Title</th>
-            <th style= {{textAlign:'center'}}>Modules</th>
-            <th style= {{textAlign:'left'}}>Instructor</th>
-            <th style= {{textAlign:'left'}}>Action</th>
+            <th style={{ textAlign: 'left' }}>Course ID</th>
+            <th style={{ textAlign: 'left' }}>Title</th>
+            <th style={{ textAlign: 'center' }}>Modules</th>
+            <th style={{ textAlign: 'left' }}>Instructor</th>
+            <th style={{ textAlign: 'left' }}>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -65,7 +137,7 @@ const CourseList = ({ onAddCourse }) => {
             <tr key={course._id} className="course-row">
               <td>{course.id}</td>
               <td>{course.name}</td>
-              <td style= {{textAlign:'center'}}>{course.no_of_modules}</td>
+              <td style={{ textAlign: 'center' }}>{course.no_of_modules}</td>
               <td>{course.instructor}</td>
               <td>
                 {course.published ? (

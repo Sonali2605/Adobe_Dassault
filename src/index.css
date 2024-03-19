@@ -224,18 +224,18 @@ margin-bottom: 10px;
 }
 
 .cancel-button {
-  background: #FCFDFF 0% 0% no-repeat padding-box;
+  background: #0870d3 0% 0% no-repeat padding-box;
   border: 1px solid #AACEF2;
   border-radius: 10px;
   width: auto;
   border-radius: 60px;
   opacity: 1;
   font-size: 16px;
-  color: #0870D3 ;
+  color: white ;
   margin-bottom: 10px;
 }
 .publishBtn{
-  background: #FCFDFF 0% 0% no-repeat padding-box;
+  background: #0870d3 0% 0% no-repeat padding-box;
 border: 1px solid #AACEF2;
 border-radius: 10px;
 width: 165px;
@@ -243,7 +243,7 @@ height: 30px;
 border-radius: 60px;
 opacity: 1;
 font-size: 16px;
-color: #0870D3 ;
+color: white ;
 margin-bottom: 10px;
 }
 button.publishBtn:disabled {
