@@ -40,7 +40,7 @@ function App() {
               <AddCourse onSave={handleSaveCourse} onCancel={handleCancelAddCourse} onGoToCourseDetails={handleGoToCourseDetails} />
             ) : (
               <>
-                <button className="bg-blue-500 text-white py-2 px-4 mb-4" onClick={() => setShowAddCourse(true)}>New Course</button>
+                <button className="addCourse" onClick={() => setShowAddCourse(true)}>New Course</button>
                 <CourseList courses={courses} />
               </>
             )}

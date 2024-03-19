@@ -1,6 +1,16 @@
 /* index.css */
 
 /* Header Styles */
+@font-face {
+  font-family: 'Adobe';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Adobe'), url('.././src//assets/adobefont/AdobeCleanRegular.otf') format('woff');
+}
+ 
+body{
+  font: normal 16px Adobe;
+}
 .header {
   display: flex;
   justify-content: space-between;
@@ -46,6 +56,23 @@
   position: relative; /* Add position relative for absolute positioning */
 }
 
+.active{
+  border-bottom: 2px solid #007bff;
+}
+
+.addCourse{
+width: 165px;
+height: 30px;
+/* UI Properties */
+background: #0870D3 0% 0% no-repeat padding-box;
+border-radius: 60px;
+opacity: 1;
+font-size: 16px;
+color: white;
+border: none;
+float: right;
+margin-bottom: 10px;
+}
 .nav li a:hover {
   color: #007bff; /* Blue */
 }
@@ -90,17 +117,41 @@
 
 .course-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: initial;
+  border: none;
+  background-color: white;
+  border-spacing: 0 8px;  
+  padding: 0px 20px;
 }
 
 .header-row {
   background-color: #EEEEEE; /* Grey background */
 }
 
-.header-row th,
+.header-row th{
+  padding: 1rem;;
+  background-color: white;
+}
 .course-row td {
   border: 1px solid #CCCCCC; /* Grey border */
-  padding: 0.5rem;
+  padding: 1rem;
+}
+.course-row td:first-child {
+  border-left: 1px solid #e1e4ea;
+  border-radius: 7px 0 0 7px;
+}
+
+.course-row td:last-child {
+  border-right: 1px solid #e1e4ea;
+  border-radius: 0 7px 7px 0;
+}
+
+.course-row td {
+  border-bottom: 1px solid #e1e4ea;
+  border-top: 1px solid #e1e4ea;
+  padding: 10px 12px;
+  border-left-width: 0px;
+  border-right-width: 0px;
 }
 
 .action-button {
@@ -116,7 +167,6 @@
   background-color: #CCCCCC; /* Darker grey on hover */
 }
 .container {
-  background-color: #f4f4f6;
   padding: 20px;
 }
 
@@ -131,7 +181,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .form-label {
@@ -162,11 +212,41 @@
 }
 
 .save-button {
-  background-color: #007bff;
-  color: #ffffff;
+  width: auto;
+/* UI Properties */
+background: #0870D3 0% 0% no-repeat padding-box;
+border-radius: 60px;
+opacity: 1;
+font-size: 16px;
+color: white;
+border: none;
+margin-bottom: 10px;  
 }
 
 .cancel-button {
-  background-color: #cccccc;
-  color: #ffffff;
+  background: #FCFDFF 0% 0% no-repeat padding-box;
+  border: 1px solid #AACEF2;
+  border-radius: 10px;
+  width: auto;
+  border-radius: 60px;
+  opacity: 1;
+  font-size: 16px;
+  color: #0870D3 ;
+  margin-bottom: 10px;
+}
+.publishBtn{
+  background: #FCFDFF 0% 0% no-repeat padding-box;
+border: 1px solid #AACEF2;
+border-radius: 10px;
+width: 165px;
+height: 30px;
+border-radius: 60px;
+opacity: 1;
+font-size: 16px;
+color: #0870D3 ;
+margin-bottom: 10px;
+}
+button.publishBtn:disabled {
+  background: #E9E9F0 !important;
+  color: #B6B6B6
 }

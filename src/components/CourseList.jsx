@@ -33,6 +33,7 @@ const CourseList = ({ onAddCourse }) => {
       console.log(response.data.msg); // Display success message
       alert('Course published successfully!');
       init();
+      setSelectedCourses([]);
       // Optionally, update UI or perform additional actions upon successful publishing
     } catch (error) {
       console.error('Error publishing courses:', error);
@@ -41,15 +42,22 @@ const CourseList = ({ onAddCourse }) => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Courses</h2>
-      <table className="course-table">
+      {/* <h2 className="text-2xl font-bold mb-4">Courses</h2> */}
+      <button
+        className="bg-blue-500 text-white py-2 px-4 mb-4 publishBtn"
+        onClick={handlePublishClick}
+        disabled={selectedCourses.length === 0}
+      >
+        Publish
+      </button>
+      <table className="course-table" >
         <thead>
           <tr className="header-row">
-            <th>Course ID</th>
-            <th>Title</th>
-            <th>Modules</th>
-            <th>Instructor</th>
-            <th>Action</th>
+            <th style= {{textAlign:'left'}}>Course ID</th>
+            <th style= {{textAlign:'left'}}>Title</th>
+            <th style= {{textAlign:'center'}}>Modules</th>
+            <th style= {{textAlign:'left'}}>Instructor</th>
+            <th style= {{textAlign:'left'}}>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -57,7 +65,7 @@ const CourseList = ({ onAddCourse }) => {
             <tr key={course._id} className="course-row">
               <td>{course.id}</td>
               <td>{course.name}</td>
-              <td>{course.no_of_modules}</td>
+              <td style= {{textAlign:'center'}}>{course.no_of_modules}</td>
               <td>{course.instructor}</td>
               <td>
                 {course.published ? (
@@ -74,14 +82,6 @@ const CourseList = ({ onAddCourse }) => {
           ))}
         </tbody>
       </table>
-
-      <button
-        className="bg-blue-500 text-white py-2 px-4 mb-4"
-        onClick={handlePublishClick}
-        disabled={selectedCourses.length === 0}
-      >
-        Publish
-      </button>
     </div>
   );
 };
