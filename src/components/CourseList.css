@@ -16,7 +16,7 @@
   background-color: #fefefe;
   padding: 20px;
   border-radius: 8px;
-  width: 50%; /* Adjust the width as needed */
+  width: 40%; /* Adjust the width as needed */
 }
 
 .close {
@@ -41,16 +41,19 @@
 .modal-content select,
 .modal-content button {
   display: block;
-  margin: 10px 0;
+  margin: 10px auto;
+  padding: 10px;
 }
 
 .modal-content button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #0870d3;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 20px;
   cursor: pointer;
+  min-width: 150px;
+  margin-top: 30px;
 }
 
 .modal-content button:hover {

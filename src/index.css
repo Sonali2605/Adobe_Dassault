@@ -211,6 +211,17 @@ margin-bottom: 10px;
   outline: none;
 }
 
+.button:hover{
+  cursor: pointer;
+}
+
+.publishBtn:hover{
+  cursor: pointer;
+}
+.addCourse:hover{
+  cursor: pointer;
+}
+
 .save-button {
   width: auto;
 /* UI Properties */
@@ -225,7 +236,6 @@ margin-bottom: 10px;
 
 .cancel-button {
   background: #0870d3 0% 0% no-repeat padding-box;
-  border: 1px solid #AACEF2;
   border-radius: 10px;
   width: auto;
   border-radius: 60px;

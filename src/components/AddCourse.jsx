@@ -113,11 +113,15 @@ const AddCourse = ({ onSave, onCancel, onGoToCourseDetails }) => {
           <label className="form-label">Content Url:</label>
           <input type="text" value={contentUrl} onChange={e => {setContentUrl(e.target.value);handleInputChange();} } className="input-field" />
         </div>
-        <div className="button-container" style ={{justifyContent:"flex-start", marginTop:"40px"}}>
+        <div style={{display:"flex"}}>
+        <div className="button-container" style ={{justifyContent:"flex-start", marginTop:"40px", width: "50%"}}>
           <button type="submit" className="button save-button" onClick={handleSubmit}>Save</button>
           <button type="button" className="button cancel-button" onClick={handleCancel}>Cancel</button>
-          <button type="button" className="button cancel-button" onClick={onGoToCourseDetails}>Go to Course Details</button>
           <button type="button" className="publishBtn"style={{width:"auto", height:"auto", padding:"0 28px", marginLeft: "10px"}} onClick={handlePublish} disabled={!isPublished}>Publish</button>
+        </div>
+        <div style= {{justifyContent:"flex-end", display:"flex", marginTop:"40px", width: "50%"}} >
+        <button type="button" className="button cancel-button" onClick={onGoToCourseDetails}>Go to All Courses</button>
+        </div>
         </div>
         </div>
       </div>
