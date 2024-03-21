@@ -44,7 +44,7 @@ const AddCourse = ({ onSave, onCancel, onGoToCourseDetails }) => {
       modules: moduleData // Pass moduleData along with course data
     };
 
-    axios.post('http://localhost:3000/courseData', courseData)
+    axios.post('http://54.152.80.48:3000/courseData', courseData)
       .then(response => {
         console.log('Course added successfully:', response.data);
         onSave(response.data); // Pass the added course data to the parent component
@@ -75,7 +75,7 @@ const AddCourse = ({ onSave, onCancel, onGoToCourseDetails }) => {
   const handlePublish = () => {
     // Publish the course along with moduleData
     setIsPublished(false);
-    axios.put('http://localhost:3000/publishCourse', { ids: courseToPublish, modules: moduleData })
+    axios.put('http://54.152.80.48:3000/publishCourse', { ids: courseToPublish, modules: moduleData })
       .then(publishResponse => {
         console.log('Course published successfully:', publishResponse.data.msg);
         alert('Course published successfully!');

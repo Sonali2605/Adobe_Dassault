@@ -38,7 +38,7 @@ const CourseList = ({ onAddCourse }) => {
 
   const init = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/courseData');
+      const response = await axios.get('http://54.152.80.48:3000/courseData');
       setCourses(response.data.courses);
 
       const refreshTokenResponse = await getRefreshToken();
@@ -86,7 +86,7 @@ const CourseList = ({ onAddCourse }) => {
 
   const handlePublishConfirm = async () => {
     try {
-      const response = await axios.put('http://localhost:3000/publishCourse', { ids: selectedCourses, catalogId: selectedCatalogId });
+      const response = await axios.put('http://54.152.80.48:3000/publishCourse', { ids: selectedCourses, catalogId: selectedCatalogId });
       console.log(response.data.msg); // Display success message
       alert('Course published successfully!');
       init();
