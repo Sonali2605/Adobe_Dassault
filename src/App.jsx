@@ -8,9 +8,9 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const [activeTab, setActiveTab] = useState('courses');
+  const [activeTab, setActiveTab] = useState('home');
   const [courses, setCourses] = useState([]);
-  const [showAddCourse, setShowAddCourse] = useState(false);
+  const [showAddCourse, setShowAddCourse] = useState(true);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -26,27 +26,21 @@ function App() {
 
   const handleGoToCourseDetails = () => {
     setShowAddCourse(false); // Hide the AddCourse component
-    setActiveTab('courses'); // Switch tab to 'courses'
+    setActiveTab('home'); // Switch tab to 'courses'
   };
 
   return (
     <>
       <Header activeTab={activeTab} onTabChange={handleTabChange} />
       <div className="container mx-auto px-4 py-8">
-        {activeTab === 'home' && <div className="text-2xl">Hello</div>}
+        {activeTab === 'home' && <div className="text-2xl"> 
+        <button className="addCourse" onClick={() => setActiveTab("courses")}>New Course</button>
+        <CourseList courses={courses} /></div>}
         {activeTab === 'courses' && (
           <>
-            {showAddCourse ? (
               <AddCourse onSave={handleSaveCourse} onCancel={handleCancelAddCourse} onGoToCourseDetails={handleGoToCourseDetails} />
-            ) : (
-              <>
-                <button className="addCourse" onClick={() => setShowAddCourse(true)}>New Course</button>
-                <CourseList courses={courses} />
-              </>
-            )}
           </>
         )}
-        {activeTab === 'reports' && <div className="text-2xl">Reports</div>}
       </div>
     </>
   );

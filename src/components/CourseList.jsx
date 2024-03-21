@@ -1,4 +1,3 @@
-// CourseList.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './CourseList.css'; // Import CSS for CourseList component
@@ -9,7 +8,7 @@ const CourseList = ({ onAddCourse }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedCatalogId, setSelectedCatalogId] = useState('');
   const [catalogId, setCatalogId] = useState([]);
-
+  const [flag, setFlag] = useState(1);
   useEffect(() => {
     init();
   }, []);
@@ -72,6 +71,12 @@ const CourseList = ({ onAddCourse }) => {
 
   const handlePublishClick = () => {
     setShowModal(true);
+    setFlag(1);
+  };
+
+  const handleMoveToCatalogClick = () => {
+    setShowModal(true);
+    setFlag(2);
   };
 
   const handleModalClose = () => {
@@ -104,7 +109,7 @@ const CourseList = ({ onAddCourse }) => {
         <div className="modal">
           <div className="modal-content">
             <span className="close" style={{ fontSize: "15px" }} onClick={handleModalClose}>&times;</span>
-            <h4 style={{ textAlign: 'center' }}>Select Catalog ID</h4>
+            <h4 style={{ textAlign: 'center' }}>{flag === 1 ? "Select Catalog ID to publish courses":"Change Catalog ID"}</h4>
             <select value={selectedCatalogId} onChange={handleCatalogSelection}>
               <option value="">Select Catalog ID</option>
               {catalogId?.map(catalog => (
@@ -115,39 +120,52 @@ const CourseList = ({ onAddCourse }) => {
           </div>
         </div>
       )}
-      <button
-        className="bg-blue-500 text-white py-2 px-4 mb-4 publishBtn"
-        onClick={handlePublishClick}
-        disabled={selectedCourses.length === 0}
-      >
-        Publish
-      </button>
+      <div>
+        <button
+          className="bg-blue-500 text-white py-2 px-4 mb-4 publishBtn"
+          onClick={handlePublishClick}
+          disabled={selectedCourses.length === 0}
+        >
+          Publish
+        </button>
+        <button
+          className="bg-green-500 text-white py-2 px-4 mb-4 publishBtn" style={{marginLeft:"10px"}}
+          onClick={handleMoveToCatalogClick}
+          disabled={selectedCourses.length === 0}
+        >
+          Move to Catalog
+        </button>
+      </div>
       <table className="course-table">
         <thead>
           <tr className="header-row">
-            <th style={{ textAlign: 'left' }}>Course ID</th>
+            <th style={{ textAlign: 'left' }}></th>
+            <th style={{ textAlign: 'left' }}>Course Id</th>
             <th style={{ textAlign: 'left' }}>Title</th>
             <th style={{ textAlign: 'center' }}>Modules</th>
             <th style={{ textAlign: 'left' }}>Instructor</th>
-            <th style={{ textAlign: 'left' }}>Action</th>
+            <th style={{ textAlign: 'left' }}>Status</th>
           </tr>
         </thead>
         <tbody>
           {courses.map(course => (
             <tr key={course._id} className="course-row">
+              <td style={{textAlign:"center"}}>
+                <input
+                  type="checkbox"
+                  checked={selectedCourses.includes(course._id)}
+                  onChange={(e) => handleCheckboxChange(course._id, e.target.checked)}
+                />
+              </td>
               <td>{course.id}</td>
               <td>{course.name}</td>
               <td style={{ textAlign: 'center' }}>{course.no_of_modules}</td>
               <td>{course.instructor}</td>
               <td>
                 {course.published ? (
-                  <span className="published-label">Published</span>
+                  <span className="published-label" style={{ color: 'green' }}>Published</span>
                 ) : (
-                  <input
-                    type="checkbox"
-                    checked={selectedCourses.includes(course._id)}
-                    onChange={(e) => handleCheckboxChange(course._id, e.target.checked)}
-                  />
+                  <span className="published-label" style={{ color: '#e1e4ea' }}>Unpublished</span>
                 )}
               </td>
             </tr>

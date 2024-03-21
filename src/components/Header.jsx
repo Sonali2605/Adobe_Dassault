@@ -20,11 +20,6 @@ const Header = ({ activeTab, onTabChange }) => {
               Courses
             </Link>
           </li>
-          <li>
-            <Link to="/reports" className={`nav-link ${activeTab === 'reports' ? 'font-bold active' : ''}`} onClick={() => onTabChange('reports')}>
-              Reports
-            </Link>
-          </li>
         </ul>
       </nav>
       <div className="profile">
